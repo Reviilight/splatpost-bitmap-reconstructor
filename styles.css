@@ -46,4 +46,5 @@ footer {
 .splatpost {
     max-width: min(500px, 100%);
     max-height: 500px;
+    image-rendering: pixelated;
 }
