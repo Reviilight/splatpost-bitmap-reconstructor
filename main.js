@@ -93,30 +93,30 @@ const NoticeType = Object.freeze({
 
 function showNotAnImageError() {
     clearAllNotices();
-    addNotice("ERROR: the loaded file is not an image... ￣へ￣", NoticeType.ERROR);
+    addNotice("the loaded file is not an image... ￣へ￣", NoticeType.ERROR);
 }
 
 function showSmallScaleWarning() {
-    addNotice("WARNING: the loaded image is small. The result might be imperfect ╯︿╰", NoticeType.WARNING);
+    addNotice("the loaded image is small. The result might be imperfect ╯︿╰", NoticeType.WARNING);
 }
 
 function showSmallScaleError() {
-    addNotice("ERROR: the loaded image is too small... ╮(╯▽╰)╭", NoticeType.ERROR);
+    addNotice("the loaded image is too small... ╮(╯▽╰)╭", NoticeType.ERROR);
 }
 
 function showWrongAspectRatioWarning() {
-    addNotice("WARNING: the loaded image's dimensions are not 16:9... >_<", NoticeType.WARNING);
+    addNotice("the loaded image's dimensions are not 16:9... >_<", NoticeType.WARNING);
 }
 
 function showNotIntegerScaleWarning() {
-    addNotice("WARNING: the loaded image's dimensions are not supported... >_<", NoticeType.WARNING);
+    addNotice("the loaded image's dimensions are not supported... >_<", NoticeType.WARNING);
 }
 
 function addNotice(text, type) {
     if (type === NoticeType.WARNING) {
-        noticeWrapper.innerHTML += '<p class="notice notice-warning">' + text + "</p>";
+        noticeWrapper.innerHTML += '<p class="notice notice-warning">WARNING: ' + text + "</p>";
     } else if (type === NoticeType.ERROR) {
-        noticeWrapper.innerHTML += '<p class="notice notice-error">' + text + "</p>";
+        noticeWrapper.innerHTML += '<p class="notice notice-error">ERROR: ' + text + "</p>";
     } else {
         console.error(`The notice type "${type}" is not supported.`);
     }
