@@ -86,29 +86,40 @@ function processImage() {
     return reconstructBitmap(imageData, thresholdValue);
 }
 
+const NoticeType = Object.freeze({
+    WARNING: "WARNING",
+    ERROR: "ERROR",
+});
+
 function showNotAnImageError() {
     clearAllNotices();
-    addNotice("ERROR: the loaded file is not an image... ￣へ￣");
+    addNotice("ERROR: the loaded file is not an image... ￣へ￣", NoticeType.ERROR);
 }
 
 function showSmallScaleWarning() {
-    addNotice("WARNING: the loaded image is small. The result might be imperfect ╯︿╰");
+    addNotice("WARNING: the loaded image is small. The result might be imperfect ╯︿╰", NoticeType.WARNING);
 }
 
 function showSmallScaleError() {
-    addNotice("ERROR: the loaded image is too small... ╮(╯▽╰)╭");
+    addNotice("ERROR: the loaded image is too small... ╮(╯▽╰)╭", NoticeType.ERROR);
 }
 
 function showWrongAspectRatioWarning() {
-    addNotice("WARNING: the loaded image's dimensions are not 16:9... >_<");
+    addNotice("WARNING: the loaded image's dimensions are not 16:9... >_<", NoticeType.WARNING);
 }
 
 function showNotIntegerScaleWarning() {
-    addNotice("WARNING: the loaded image's dimensions are not supported... >_<");
+    addNotice("WARNING: the loaded image's dimensions are not supported... >_<", NoticeType.WARNING);
 }
 
-function addNotice(text) {
-    noticeWrapper.innerHTML += "<p>" + text + "</p>";
+function addNotice(text, type) {
+    if (type === NoticeType.WARNING) {
+        noticeWrapper.innerHTML += '<p class="notice notice-warning">' + text + "</p>";
+    } else if (type === NoticeType.ERROR) {
+        noticeWrapper.innerHTML += '<p class="notice notice-error">' + text + "</p>";
+    } else {
+        console.error(`The notice type "${type}" is not supported.`);
+    }
 }
 
 function clearAllNotices() {
