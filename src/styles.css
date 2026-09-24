@@ -122,11 +122,11 @@ footer {
 }
 
 .notice-warning {
-    background-color: rgb(255, 255, 200);
+    background-color: rgb(88, 104, 63);
     border: 1px solid rgb(255, 230, 0);
 }
 
 .notice-error {
-    background-color: rgb(255, 200, 200);
+    background-color: rgb(109, 69, 81);
     border: 1px solid red;
 }
