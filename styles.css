@@ -1,46 +1,112 @@
+:root {
+    --bg: linear-gradient(45deg, rgb(0, 31, 46), rgb(53, 77, 70));
+    --f0oter-bg: linear-gradient(to bottom, black, rgba(0, 0, 0, 0));
+}
+
 html,
 body {
     width: 100%;
     height: 100%;
     margin: 0;
-    font-family: sans-serif
+    font-family: sans-serif;
+    color: white;
 }
 
 body {
-    background-color: lightslategray;
+    background: var(--bg);
+    background-attachment: fixed;
+}
+
+h1 {
+    margin-top: 0.5em;
+}
+
+h2,
+h3 {
+    margin-top: 1em;
+    margin-bottom: 0.2em;
 }
 
 .app {
     max-width: 1000px;
     margin-inline: auto;
-    background-color: rgb(208, 231, 255);
     border-radius: 20px;
     padding: 20px;
 }
 
-footer {
+.splatbutton {
+    position: relative;
     max-width: fit-content;
-    margin-inline: auto;
-    background-color: rgb(208, 231, 255);
-    border-radius: 20px;
-    margin-top: 8px;
+    padding: 8px;
+    border-radius: 64px;
+    border: 0px solid transparent;
+    background-color: darkslateblue;
+    color: inherit;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transition: transform 0.2s ease-out;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
+.splatbutton:hover {
+    transform: scale(1.05);
+}
+
+.splatbutton:active {
+    transform: scale(1.0);
+}
+
+.splatbutton::after {
+    content: "";
+    border-radius: inherit;
+    position: absolute;
+    inset: 0;
+}
+
+.splatbutton:hover::after {
+    animation:
+        neon-wobble 1.3s linear infinite alternate,
+        wobble 2s ease-in-out infinite alternate;
+}
+
+@keyframes neon-wobble {
+    0% {
+        box-shadow:
+            inset -1px 2px 1px 0px rgb(255, 0, 255, 0.9),
+            inset 1px -1px 1px 2px rgb(0, 255, 136, 0.7);
+    }
+
+    100% {
+        box-shadow:
+            inset 0px 0px 1px 1px rgb(255, 0, 255, 0.7),
+            inset 2px 0px 1px 1px rgb(0, 255, 136, 0.9);
+    }
+}
+
+@keyframes wobble {
+    0% {
+        transform: translate(-1px, 1px) scale(1.05);
+    }
+
+    100% {
+        transform: translate(2px, -2px) scale(1.05);
+    }
+}
+
+footer {
+    /* background: var(--f0oter-bg); */
+    padding: 16px 0;
     display: flex;
 }
 
 .copyright {
-    color: inherit;
     margin-inline: auto;
-    border-radius: 20px;
-    width: 150px;
-    height: 40px;
+    width: 140px;
+    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid transparent;
-}
-
-.copyright:hover {
-    border-color: white;
 }
 
 .splatpost {
