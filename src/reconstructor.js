@@ -1,16 +1,34 @@
-const OUTPUT_IMAGE_WIDTH = 320;
-const OUTPUT_IMAGE_HEIGHT = 120;
+export function reconstructBitmap(imageData, threshold = 128, isPortraitMode = false) {
+    let outputImageWidth = 320;
+    let outputImageHeight = 120;
 
-export function reconstructBitmap(imageData, threshold = 128) {
-    const scale = Math.floor(imageData.width / OUTPUT_IMAGE_WIDTH);
-    // TODO: identify portrait orientation
-    const bordersHeight = scale * 30;
+    if (isPortraitMode) {
+        outputImageWidth = 120;
+        outputImageHeight = 320;
+    }
 
-    const outputImage = new ImageData(OUTPUT_IMAGE_WIDTH, OUTPUT_IMAGE_HEIGHT);
-    for (let y = 0; y < OUTPUT_IMAGE_HEIGHT; y++) {
-        for (let x = 0; x < OUTPUT_IMAGE_WIDTH; x++) {
-            const blockStartX = x * scale;
-            const blockStartY = y * scale + bordersHeight;
+    let scale = 4;
+    if (isPortraitMode === false) {
+        scale = Math.floor(imageData.width / outputImageWidth);
+    } else {
+        scale = Math.floor(imageData.height / outputImageHeight);
+    }
+
+    const bordersSize = scale * 30;
+
+    const outputImage = new ImageData(outputImageWidth, outputImageHeight);
+    for (let y = 0; y < outputImageHeight; y++) {
+        for (let x = 0; x < outputImageWidth; x++) {
+            let blockStartX;
+            let blockStartY;
+
+            if (isPortraitMode === false) {
+                blockStartX = x * scale;
+                blockStartY = y * scale + bordersSize;
+            } else {
+                blockStartX = x * scale + bordersSize;
+                blockStartY = y * scale;
+            }
 
             let sumRGB = 0;
             let pixelCounter = 0;
@@ -55,9 +73,9 @@ export function reconstructBitmap(imageData, threshold = 128) {
             }
 
             if (brightness < threshold) {
-                setPixelBlack(outputImage, x, y, OUTPUT_IMAGE_WIDTH);
+                setPixelBlack(outputImage, x, y, outputImageWidth);
             } else {
-                setPixelWhite(outputImage, x, y, OUTPUT_IMAGE_WIDTH);
+                setPixelWhite(outputImage, x, y, outputImageWidth);
             }
         }
     }

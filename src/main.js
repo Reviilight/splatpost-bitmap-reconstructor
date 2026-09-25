@@ -16,6 +16,8 @@ const thresholdResetBtn = document.getElementById("threshold-reset-btn");
 const THRESHOLD_DEFAULT_VALUE = 128;
 let thresholdValue = THRESHOLD_DEFAULT_VALUE;
 
+let isPortraitMode = false;
+
 threshold.oninput = function () {
     thresholdValue = this.value;
     thresholdValueHTML.textContent = this.value;
@@ -51,17 +53,34 @@ function onImageLoad() {
     URL.revokeObjectURL(this.src);
     clearAllNotices();
 
+    // Aspect ratio and orientation checks
     if (this.width / 16 * 9 !== this.height) {
-        showWrongAspectRatioWarning();
+        if (this.width / 9 * 16 !== this.height) {
+            showWrongAspectRatioWarning();
+            if (this.width >= this.height) {
+                isPortraitMode = false;
+            } else {
+                isPortraitMode = true;
+            }
+        } else {
+            isPortraitMode = true;
+        }
+    } else {
+        isPortraitMode = false;
     }
 
-    if (this.width % 320 !== 0) {
+    let loadedComparableDimensionSize = this.width;
+    if (isPortraitMode) {
+        loadedComparableDimensionSize = this.height;
+    }
+
+    if (loadedComparableDimensionSize % 320 !== 0) {
         showNotIntegerScaleWarning();
     }
 
-    if (Math.floor(this.width / 320) < 1) {
+    if (Math.floor(loadedComparableDimensionSize / 320) < 1) {
         showSmallScaleError();
-    } else if (Math.floor(this.width / 320) <= 2) {
+    } else if (Math.floor(loadedComparableDimensionSize / 320) <= 2) {
         showSmallScaleWarning();
     }
 
@@ -83,7 +102,7 @@ function drawRCImage(imageData) {
 
 function processImage() {
     const imageData = canvasOGContext.getImageData(0, 0, canvasOG.width, canvasOG.height);
-    return reconstructBitmap(imageData, thresholdValue);
+    return reconstructBitmap(imageData, thresholdValue, isPortraitMode);
 }
 
 const NoticeType = Object.freeze({
@@ -105,9 +124,7 @@ function showSmallScaleError() {
 }
 
 function showWrongAspectRatioWarning() {
-    addNotice("The loaded image's aspect ratio should be 16:9 >_<", NoticeType.WARNING);
-    //addNotice("The loaded image's aspect ratio should be 16:9 or 9:16 >_<", NoticeType.WARNING);
-    // TODO: Change to this when support for portrait posts will be added
+    addNotice("The loaded image's aspect ratio should be 16:9 or 9:16 >_<", NoticeType.WARNING);
 }
 
 function showNotIntegerScaleWarning() {
