@@ -93,23 +93,25 @@ const NoticeType = Object.freeze({
 
 function showNotAnImageError() {
     clearAllNotices();
-    addNotice("the loaded file is not an image... ￣へ￣", NoticeType.ERROR);
+    addNotice("The loaded file is not an image... ￣へ￣", NoticeType.ERROR);
 }
 
 function showSmallScaleWarning() {
-    addNotice("the loaded image is small. The result might be imperfect ╯︿╰", NoticeType.WARNING);
+    addNotice("The loaded image is small, so the result might be imperfect ╯&NoBreak;︿╰", NoticeType.WARNING);
 }
 
 function showSmallScaleError() {
-    addNotice("the loaded image is too small... ╮(╯▽╰)╭", NoticeType.ERROR);
+    addNotice("The loaded image is too small... ╮(╯▽╰)╭", NoticeType.ERROR);
 }
 
 function showWrongAspectRatioWarning() {
-    addNotice("the loaded image's dimensions are not 16:9... >_<", NoticeType.WARNING);
+    addNotice("The loaded image's aspect ratio should be 16:9 >_<", NoticeType.WARNING);
+    //addNotice("The loaded image's aspect ratio should be 16:9 or 9:16 >_<", NoticeType.WARNING);
+    // TODO: Change to this when support for portrait posts will be added
 }
 
 function showNotIntegerScaleWarning() {
-    addNotice("the loaded image's dimensions are not supported... >_<", NoticeType.WARNING);
+    addNotice("The loaded image's dimensions are not supported >_<", NoticeType.WARNING);
 }
 
 function addNotice(text, type) {
