@@ -1,4 +1,5 @@
 :root {
+    color-scheme: dark;
     --bg: linear-gradient(45deg, rgb(0, 31, 46), rgb(53, 77, 70));
     --f0oter-bg: linear-gradient(to bottom, black, rgba(0, 0, 0, 0));
 }
@@ -19,42 +20,89 @@ body {
 
 h1 {
     margin-top: 0.5em;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 h2,
 h3 {
-    margin-top: 1em;
-    margin-bottom: 0.2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.4em;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+}
+
+main {
+    background-color: #008b8b70;
 }
 
 .app {
-    max-width: 1000px;
+    max-width: 540px;
     margin-inline: auto;
-    border-radius: 20px;
-    padding: 20px;
+    padding: 10px;
+}
+
+.app-info {
+    position: relative;
+}
+
+.description {
+    margin: 32px 0;
+    text-align: justify;
+}
+
+.icon {
+    float: right;
+    width: 100px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    object-fit: contain;
+    border-radius: 8px;
+    image-rendering: pixelated;
+}
+
+.workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.og-wrapper,
+.rc-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-image {
+    display: none;
 }
 
 .splatbutton {
     position: relative;
     max-width: fit-content;
-    padding: 8px;
-    border-radius: 64px;
-    border: 0px solid transparent;
-    background-color: darkslateblue;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(0, 192, 182);
     color: inherit;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    transition: transform 0.2s ease-out;
-    /* display: flex;
+    box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+    display: flex;
     flex-direction: column;
-    align-items: center; */
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
 }
 
 .splatbutton:hover {
+    box-shadow: -5px 5px 20px 4px rgba(0, 0, 0, 0.3);
     transform: scale(1.05);
 }
 
 .splatbutton:active {
-    transform: scale(1.0);
+    box-shadow: -1px 1px 5px 2px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
 }
 
 .splatbutton::after {
@@ -96,14 +144,19 @@ h3 {
 
 footer {
     /* background: var(--f0oter-bg); */
-    padding: 16px 0;
+    padding: 8px 0;
     display: flex;
 }
 
-.copyright {
+.footer-wrapper {
     margin-inline: auto;
-    width: 140px;
-    height: 32px;
+    display: flex;
+    flex-direction: row;
+}
+
+.footer__element {
+    text-decoration: none;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,10 +166,26 @@ footer {
     max-width: min(500px, 100%);
     max-height: 500px;
     box-shadow: -5px 5px 20px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 .splatpost-rc {
     image-rendering: pixelated;
+}
+
+.splatpost-rc[width="320"] {
+    /* min-width: 320px; */
+    /* max-width: 320px; */
+}
+
+.splatpost-rc[width="120"] {
+    /* min-width: 120px; */
+    /* max-width: 120px; */
+}
+
+.notice-wrapper {
+    margin: 0;
 }
 
 .notice {
@@ -133,4 +202,42 @@ footer {
 .notice-error {
     background-color: rgb(109, 69, 81);
     border: 1px solid red;
+}
+
+.threshold-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.threshold {
+    flex: 2;
+    min-width: 40px;
+}
+
+.threshold-reset-btn {
+    min-width: 36px;
+    height: 36px;
+    margin-right: 0;
+    padding: 6px;
+}
+
+.card {
+    box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff28;
+    border-radius: 16px;
+    padding: 8px;
+    border: 1px solid #ffffff73;
+    overflow: hidden;
+}
+
+@media (width>=768px) {
+    .workspace {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .app {
+        max-width: 1000px;
+        padding: 20px;
+    }
 }

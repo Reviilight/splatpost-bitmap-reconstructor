@@ -7,45 +7,69 @@
     <title>Splatpost Bitmap Reconstructor</title>
     <link rel="stylesheet" href="src/styles.css">
     <script type="module" src="src/main.js"></script>
+    <meta name="theme-color" content="#035158" />
 </head>
 
 <body>
-    <main class="app">
-        <h1>Splatpost Bitmap Reconstructor</h1>
-        <p>A web tool that helps reconstruct the original pixel-perfect bitmap from a Splatoon's automatic screenshot of
-            a post.</p>
-        <p>Supported games:</p>
-        <ul>
-            <li>Splatoon 2 (Nintendo Switch)</li>
-            <li>Splatoon 3 (Nintendo Switch /2)</li>
-        </ul>
-        <!-- <div class="splatbutton"> -->
-            <label for="og-image">Load Image</label>
-            <input type="file" id="og-image" accept="image/*">
-        <!-- </div> -->
-        <h2>Original Image</h2>
-        <p id="notice-wrapper"></p>
-        <canvas id="canvas-og" class="splatpost" width="1280" height="720"></canvas>
-        <h2>Reconstructed Image</h2>
-        <div class="threshold-container">
-            <label for="threshold">Threshold:</label>
-            <input type="range" id="threshold" min="1" max="255" value="128" step="1">
-            <span id="threshold-value">128</span>
-            <button id="threshold-reset-btn" class="splatbutton">Reset to Default</button>
+    <main>
+        <div class="app">
+            <div class="app-info">
+                <h1>Splatpost Bitmap Reconstructor</h1>
+                <div class="description">
+                    <img src="assets/icons/SBR icon.png" class="icon"
+                        alt="An icon of the tool on which you can see rough estimation of what it does.">
+                    <p>A web app that helps reconstruct the original, pixel-perfect bitmap from an automatically saved
+                        image of a post from Splatoon games.</p>
+                    <p>Supported games:</p>
+                    <ul>
+                        <li>Splatoon 2 (Nintendo Switch)</li>
+                        <li>Splatoon 3 (Nintendo Switch /2)</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <br>
+            <div class="workspace">
+                <div class="og-wrapper card">
+                    <div class="card__top">
+                        <h2>Original Image</h2>
+                    </div>
+                    <label class="splatbutton" for="og-image">Load Image</label>
+                    <input type="file" id="og-image" class="input-image" accept="image/*">
+                    <canvas id="canvas-og" class="splatpost" width="1280" height="720"></canvas>
+                    <p id="notice-wrapper" class="notice-wrapper"></p>
+                </div>
+                <div class="rc-wrapper card">
+                    <div class="card__top">
+                        <h2>Reconstructed Image</h2>
+                    </div>
+                    <div class="threshold-wrapper">
+                        <label for="threshold">Threshold:</label>
+                        <input type="range" id="threshold" class="threshold" min="1" max="255" value="128" step="1">
+                        <span id="threshold-value">128</span>
+                        <button id="threshold-reset-btn" class="splatbutton threshold-reset-btn"><img
+                                src="assets/icons/revert.png" height="24" alt="Reset to Default Button."></button>
+                    </div>
+                    <canvas id="canvas-rc" class="splatpost splatpost-rc" width="320" height="120"></canvas>
+                    <div><button id="download-btn" class="splatbutton">Save to Device</button></div>
+                    <!-- TODO: add options to mod the result -->
+                    <!-- 
+                    <h3>Options:</h3>
+                    <p>size</p>
+                    <p>format</p>
+                    <p>orientation</p>
+                    -->
+                </div>
+            </div>
+            <br>
         </div>
-        <canvas id="canvas-rc" class="splatpost splatpost-rc" width="320" height="120"></canvas>
-        <div><button id="download-btn" class="splatbutton">Save to Device</button></div>
-        <!-- TODO: add options to mod the result -->
-        <!-- 
-        <h3>Options:</h3>
-        <p>size</p>
-        <p>format</p>
-        <p>orientation</p>
-         -->
-        <br>
     </main>
     <footer>
-        <a href="https://reviilight.github.io/" class="copyright splatbutton">©2026 Reviilight</a>
+        <div class="footer-wrapper">
+            <a href="https://github.com/Reviilight/splatpost-bitmap-reconstructor"
+                class="footer__element splatbutton">v1.0.0</a>
+            <a href="https://reviilight.github.io/" class="footer__element splatbutton">©2026 Reviilight</a>
+        </div>
     </footer>
 </body>
 
